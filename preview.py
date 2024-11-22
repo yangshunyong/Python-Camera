@@ -57,39 +57,39 @@ if __name__ == "__main__":
         if not ret:
             print("Can't receive frame (stream end?). Exiting ...")
             break
-    
-    # increase frame number by 1
+
+        # increase frame number by 1
         frame_number += 1
 
-    # Calculate time elspased in seconds from start_time
+        # Calculate time elspased in seconds from start_time
         time_in_seconds = (cv2.getTickCount() - start_time) / cv2.getTickFrequency()
 
-    # Calculate frame rate by frame_number and time_in_seconds
+        # Calculate frame rate by frame_number and time_in_seconds
         frame_rate = frame_number / time_in_seconds
-    # Set frame_rate to 0 if time_in_seconds less than 2 seconds
+        # Set frame_rate to 0 if time_in_seconds less than 2 seconds
         if time_in_seconds < 2:
             frame_rate = 0.0
 
-    # overlay frame number with the frame
+        # overlay frame number with the frame
         cv2.putText(frame, 'Frame Number: {}'.format(frame_number), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
-    # overlay frame rate with the frame
-    # Truncate frame_rate to keep only 2 decimal places
+        # overlay frame rate with the frame
+        # Truncate frame_rate to keep only 2 decimal places
         frame_rate = "{:.2f}".format(frame_rate)
         cv2.putText(frame, 'Frame Rate: {}'.format(frame_rate) + 'fps', (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)    
 
-    # scale frame to match window szie
+        # scale frame to match window szie
         frame = cv2.resize(frame, (640, 480))
 
-    # Convert the frame to grayscale
+        # Convert the frame to grayscale
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    # Convert the frame to Yuyv and save to a file in binary mode
+        # Convert the frame to Yuyv and save to a file in binary mode
         yuyv = cv2.cvtColor(frame, cv2.COLOR_RGB2YUV_YV12 )
-    # Save yuyv to a file in binary mode
+        # Save yuyv to a file in binary mode
         with open('yuyv.bin', 'wb') as f:
             f.write(yuyv)
-        
-    # show the frame
+
+        # show the frame
         cv2.imshow('frame', frame)
 
         # Press 'q' to quit
